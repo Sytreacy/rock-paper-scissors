@@ -1,0 +1,270 @@
+:root {
+  --yellow: #FED07A;
+  --blue: #4E89FF;
+  --pink: #FB4576;
+  --medium-pink: #C85260;
+  --light-pink: #FE7988;
+  --clr: #F4697C;
+  --lighter-pink: #fb8691;
+  --darker-pink: #AE2633;
+  --darker-pink-clr2: #AF2836;
+  --dark-pink: #A03232;
+  --darker: #983040;
+  --dominent: #cc5464;
+  --green: #29F1C7;
+  --white: #fff;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  transition: all 500ms ease-in-out;
+}
+
+body {
+  background-color: var(--medium-pink);
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-flex-col {
+  flex-direction: column;
+}
+
+.txt-align-center {
+  text-align: center;
+}
+
+.wrapper {
+  height: 100vh;
+}
+
+.game-intro-container {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.game-intro {
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+  padding: 4em;
+}
+
+h1 {
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+h2 {
+  color: var(--dark-pink);
+}
+
+.game-title {
+  color: var(--darker-pink);
+  font-weight: bold;
+}
+
+.game-gif {
+  height: 300px;
+  object-fit: cover;
+}
+
+button {
+  background-color: var(--white);
+  color: var(--dark-pink);
+  padding: 1em;
+  border-radius: 1em;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--dark-pink);
+  color: var(--lighter-pink);
+}
+
+.user-choices-container {
+  background-color: var(--dark-pink);
+  padding: 2em 0 4em;
+  gap: 2.5em;
+}
+
+.round-container {
+  background-color: var(--white);
+  color: var(--darker-pink);
+  padding: 0.25em;
+  text-align: center;
+}
+
+.choose-option-header {
+  width: 100%;
+  color: var(--white);
+  padding: 0 1em;
+}
+
+.choices-container,
+.pc-choices-container {
+  justify-content: space-around;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+#user-rock,
+#user-paper,
+#user-scissor {
+  cursor: pointer;
+}
+
+#user-rock:hover>svg,
+#user-paper:hover>svg,
+#user-scissor:hover>svg {
+  background-color: var(--white);
+  fill: var(--dark-pink);
+}
+
+svg {
+  border-radius: 5em;
+  border: 3px solid var(--white);
+  fill: var(--white);
+  padding: 2em;
+}
+
+.choice-icons {
+  width: 100px;
+  height: 100px;
+}
+
+.round-result-wrapper {
+  margin-bottom: 2em;
+}
+
+.round-result-wrapper h2 {
+  color: var(--white);
+}
+
+#result-container {
+  background-color: var(--darker-pink);
+}
+
+.round-winner {
+  background-color: var(--lighter-pink);
+  color: var(--dark-pink);
+  padding: 1em;
+  font-weight: bold;
+}
+
+#round-winner {
+  color: var(--white);
+}
+
+.round-result-container {
+  justify-content: center;
+  gap: 3em;
+  margin: 2em;
+  flex-direction: column;
+}
+
+.vs {
+  color: var(--white);
+  align-self: center;
+  font-weight: bold;
+  font-size: clamp(1rem, 2rem, 2.5rem);
+}
+
+.user-choice,
+.pc-choice {
+  gap: 1em;
+  align-items: center;
+}
+
+.pc-text-align {
+  text-align: end;
+}
+
+.score-txt {
+  color: var(--lighter-pink);
+  font-weight: bold;
+}
+
+#user-score,
+#pc-score,
+.final-winner {
+  color: var(--white);
+}
+
+.play-again-container {
+  gap: 2em;
+  padding: 3em;
+  background-color: var(--white);
+  color: var(--darker-pink-clr2);
+  border-radius: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 100vw var(--lighter-pink);
+}
+
+.final-winner,
+.game-winner-text {
+  font-weight: bold;
+}
+
+#play-again-btn {
+  width: fit-content;
+  margin: 0 auto;
+  border: 1px solid var(--lighter-pink);
+  background-color: var(--lighter-pink);
+  color: var(--white);
+}
+
+#play-again-btn:hover {
+  border: 1px solid var(--darker-pink);
+  background-color: var(--white);
+  color: var(--darker-pink-clr2);
+}
+
+.choices-border {
+  border: 2px solid var(--white);
+  border-radius: 2em;
+  padding: 1em;
+  background: var(--dark-pink);
+}
+
+@media all and (min-width: 555px) {
+  .round-result-container {
+    flex-direction: row;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  svg {
+    border-radius: 15em;
+    padding: 3em;
+  }
+}
