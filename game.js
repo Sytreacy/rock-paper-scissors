@@ -13,58 +13,23 @@ function getComputerChoice() {
   return choice;
 }
 
-function continueGame(userSelect) {
-  let pcSelect = getComputerChoice();
-  let result = game(userSelect, pcSelect);
-
-  document.getElementById("result-container").classList.remove("d-none");
-  document.getElementById("round-result").textContent = result;
-}
-
 let round = 0;
 function gameRound() {
   if (round <= 5) {
-    const choiceRock = document.getElementById("user-rock");
-    const choiceScissor = document.getElementById("user-scissor");
-    const choicePaper = document.getElementById("user-paper");
+    let userChoices = document.querySelectorAll(".user-choices");
+    userChoices.forEach((userChoice) => {
+      userChoice.addEventListener("click", function () {
+        round++;
+        document.getElementById("round-no").textContent = round;
+        document.getElementById("round-no-result").textContent = round;
 
-    choiceRock.addEventListener("click", function (event) {
-      round++;
-      document.getElementById("round-no").textContent = round;
-      document.getElementById("round-no-result").textContent = round;
+        userPicked = userChoice.getAttribute("value");
+        settleScoreAndShowResult(userPicked);
 
-      userSelect = choiceRock.getAttribute("value");
-      continueGame(userSelect);
-      changeUserChoiceIcon(userSelect);
-      if (round === 5) {
-        displayEndGameModal();
-      }
-    });
-
-    choiceScissor.addEventListener("click", function (event) {
-      round++;
-      document.getElementById("round-no").textContent = round;
-      document.getElementById("round-no-result").textContent = round;
-
-      let userSelect = choiceScissor.getAttribute("value");
-      continueGame(userSelect);
-      changeUserChoiceIcon(userSelect);
-      if (round === 5) {
-        displayEndGameModal();
-      }
-    });
-
-    choicePaper.addEventListener("click", function (event) {
-      round++;
-      document.getElementById("round-no").textContent = round;
-      document.getElementById("round-no-result").textContent = round;
-
-      let userSelect = choicePaper.getAttribute("value");
-      continueGame(userSelect);
-      changeUserChoiceIcon(userSelect);
-      if (round === 5) {
-        displayEndGameModal();
-      }
+        if (round === 5) {
+          setTimeout(displayEndGameModal, 500);
+        }
+      });
     });
   }
 }
@@ -122,50 +87,48 @@ function countComparison(userTotal, pcTotal) {
   return result;
 }
 
-function game(userSelect, pcSelect) {
-  let userResult = choiceComparison(userSelect, pcSelect);
+function settleScoreAndShowResult(userPicked) {
+  let pcPicked = getComputerChoice();
+  let roundResult = choiceComparison(userPicked, pcPicked);
 
-  let countingResult = countComparison(
-    userResult.choice1Count,
-    userResult.choice2Count
+  displayChoices(userPicked, pcPicked);
+
+  let gameResult = countComparison(
+    roundResult.choice1Count,
+    roundResult.choice2Count
   );
 
-  changePcChoiceIcon(pcSelect);
+  document.getElementById("result-container").classList.remove("d-none");
+  document.getElementById("user-score").textContent = roundResult.choice1Count;
+  document.getElementById("pc-score").textContent = roundResult.choice2Count;
 
-  document.getElementById("user-score").textContent = userResult.choice1Count;
+  document.getElementById("round-winner").textContent = roundResult.msg;
+  document.getElementById("round-result").textContent = gameResult;
+  document.getElementById("game-winner").textContent = gameResult;
 
-  document.getElementById("pc-score").textContent = userResult.choice2Count;
-  document.getElementById("round-winner").textContent = userResult.msg;
-  document.getElementById("round-result").textContent = countingResult;
-  document.getElementById("game-winner").textContent = countingResult;
-
-  return countingResult;
+  return gameResult;
 }
 
-function changeUserChoiceIcon(userSelect) {
-  let userChoice = "user-" + userSelect;
+function displayChoices(userPicked, pcPicked) {
   let userChoiceDiv = document.getElementById("user-choice-icon");
-  let userSelectedIcon = document.getElementById(userChoice);
+  let userSelectedIcon = document.getElementById("user-" + userPicked);
   userChoiceDiv.innerHTML = userSelectedIcon.innerHTML;
-}
 
-function changePcChoiceIcon(pcSelect) {
   let pcSelectDiv = document.getElementById("pc-choice-icon");
-  let placePcSelection = document.getElementById("pc-" + pcSelect);
+  let placePcSelection = document.getElementById("pc-" + pcPicked);
   pcSelectDiv.innerHTML = placePcSelection.innerHTML;
 }
 
 let playBtn = document.getElementById("playBtn");
 playBtn.addEventListener("click", function () {
-  console.log("play btn clicked");
   //change div content to player selection div
   let gameIntro = document.getElementsByClassName("game-intro-container")[0];
   let userChoice = document.getElementsByClassName("selection-container")[0];
-
   gameIntro.innerHTML = userChoice.innerHTML;
 
   document.getElementsByTagName("body")[0].style.backgroundColor =
     "var(--dark-pink)";
+
   gameRound();
 });
 

@@ -126,15 +126,11 @@ button:hover {
   flex-wrap: wrap;
 }
 
-#user-rock,
-#user-paper,
-#user-scissor {
+.user-choices {
   cursor: pointer;
 }
 
-#user-rock:hover>svg,
-#user-paper:hover>svg,
-#user-scissor:hover>svg {
+.user-choices:hover>svg {
   background-color: var(--white);
   fill: var(--dark-pink);
 }
